@@ -1,0 +1,290 @@
+﻿Slip 6 
+Q1: 
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+ <meta charset="UTF-8"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Your Web Page</title> 
+ <style> 
+ body { 
+ font-family: Arial, sans-serif; 
+ margin: 0; 
+ padding: 0; 
+ background-color: #f4f4f4; 
+ } 
+ header { 
+ background-color: #333; 
+ color: #fff; 
+ text-align: center; 
+ padding: 10px; 
+ } 
+ nav { 
+ background-color: #666; 
+ padding: 10px; 
+ } 
+ nav a { 
+ color: #fff; 
+ text-decoration: none; 
+ margin-right: 15px; 
+ } 
+ section { 
+ padding: 20px; 
+ } 
+ img { 
+ max-width: 100%; 
+ height: auto; 
+ } 
+ table { 
+ width: 100%; 
+ border-collapse: collapse; 
+ margin-top: 20px; 
+ } 
+ th, td {
+ border: 1px solid #ddd; 
+ padding: 8px; 
+ text-align: left; 
+ } 
+ th { 
+ background-color: #4CAF50; 
+ color: white; 
+ } 
+ </style> 
+</head> 
+<body> 
+ <header> 
+ <h1>Your Logo</h1> 
+ </header> 
+ <nav> 
+ <a href="#">Home</a> 
+ <a href="#">About</a> 
+ <a href="#">Services</a> 
+ <a href="#">Contact</a> 
+ </nav> 
+ <section> 
+ <h2>Welcome to Your Website</h2> 
+ <p>This is some informative text about your website. You can customize this section to  provide details about your content.</p> 
+ <img src="your-image.jpg" alt="Description of your image"> 
+ <p>Here's a hyperlink to an external website: <a href="https://www.example.com">Example  Website</a></p> 
+ <h3>Table Example</h3> 
+ <table> 
+ <thead> 
+ <tr> 
+ <th>Column 1</th> 
+ <th>Column 2</th> 
+ <th>Column 3</th> 
+ </tr> 
+ </thead> 
+ <tbody> 
+ <tr> 
+ <td>Data 1</td> 
+ <td>Data 2</td> 
+ <td>Data 3</td> 
+ </tr> 
+ <tr> 
+ <td>Data 4</td> 
+ <td>Data 5</td>
+ <td>Data 6</td> 
+ </tr> 
+ </tbody> 
+ </table> 
+ </section> 
+</body> 
+</html> 
+Q2: 
+Model the following information as a document database. 
+A customer can take different and get the benefit. There are 
+different types of policies provided by various companies 
+2. Assume appropriate attributes and collections as per the query 
+requirements. [3] 
+3. Insert at least 5 documents in each collection. [3] 
+4. Answer the following Queries. 
+a. List the details of customers who have taken “Komal Jeevan” Policy [3] 
+b. Display average premium amount [3] 
+c. Increase the premium amount by 5% for policy type=”Monthly” 
+[4] 
+d. Count no. of customers who have taken policy type “half yearly”. 
+>>sudo systemctl start mongod 
+>>mongosh 
+>>use Slip6Q2 
+>>db.customers.insertMany([ 
+ { 
+ "customer_id": 1, 
+ "name": "John Doe", 
+ "email": "john@example.com", 
+ "policies": [ 
+ {"policy_name": "Komal Jeevan", "premium_amount": 1000, "policy_type": "Yearly"},  {"policy_name": "Life Protect", "premium_amount": 500, "policy_type": "Monthly"}   
+ ] 
+ }, 
+ { 
+ "customer_id": 2, 
+ "name": "Jak Sparrow", 
+ "email": "jack@example.com", 
+ "policies": [ 
+ {"policy_name": "Komal Jeevan", "premium_amount": 1000, "policy_type": "Yearly"},   
+ ] 
+ }, 
+ { 
+ "customer_id": 3, 
+ "name": "Vicky frow",
+ "email": "vicky@example.com", 
+ "policies": [ 
+ {"policy_name": "Life Protect", "premium_amount": 500, "policy_type": "Monthly"}   
+ ] 
+ }, 
+ { 
+ "customer_id": 4, 
+ "name": "Kite Sins", 
+ "email": "kite@example.com", 
+ "policies": [ 
+ {"policy_name": "Life Protect", "premium_amount": 500, "policy_type": "Monthly"}   
+ ] 
+ }, 
+ { 
+ "customer_id": 5, 
+ "name": "Charlie Khyl", 
+ "email": "charlie@example.com", 
+ "policies": [ 
+ {"policy_name": "Komal Jeevan", "premium_amount": 1000, "policy_type": "Yearly"},  {"policy_name": "Life Protect", "premium_amount": 500, "policy_type": "Monthly"},  {"policy_name": "Jeevan Labh","premium_amount":900,"policy_type":"Half yearly"} ]  } 
+]); 
+db.policies.insertMany([ 
+ {"policy_name": "Komal Jeevan", "policy_type": "Yearly", "company": "ABC Insurance",  "benefit": "Death Benefit + Maturity Benefit"}, 
+ {"policy_name": "Life Protect", "policy_type": "Monthly", "company": "XYZ Insurance",  "benefit": "Life Coverage"}, 
+ {"policy_name": "Jeevan Labh", "policy_type": "Half yearly", "company": "HIJ Insurance",  "benefit": "Life Coverage"} 
+]); 
+a. List the details of customers who have taken "Komal Jeevan" Policy:  c 
+b. Display average premium amount: 
+ db.customers.aggregate([ 
+ { $unwind: "$policies" }, 
+ { $group: { _id: null, averagePremium: { $avg: "$policies.premium_amount" } } }]); 
+c. Increase the premium amount by 5% for policy type="Monthly": 
+ db.customers.updateMany( 
+ { "policies.policy_type": "Monthly" }, 
+ { $mul: { "policies.$.premium_amount": 1.05 } }); 
+d. Count no. of customers who have taken policy type "half yearly": 
+ db.customers.count({ "policies.policy_type": "Half Yearly" });
+Slip 22: 
+Q1:  
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+ <meta charset="UTF-8"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>3D Text Effects</title> 
+ <style> 
+ body { 
+ font-family: 'Arial', sans-serif; 
+ background-color: #f4f4f4; 
+ margin: 0; 
+ padding: 0; 
+ display: flex; 
+ justify-content: center; 
+ align-items: center; 
+ height: 100vh; 
+ } 
+ .container { 
+ text-align: center; 
+ } 
+ .threed-text { 
+ font-size: 3em; 
+ color: #3498db; 
+ text-transform: uppercase; 
+ letter-spacing: 2px; 
+ position: relative; 
+ perspective: 1000px; 
+ display: inline-block; 
+ } 
+ .threed-text span { 
+ display: inline-block; 
+ transform-style: preserve-3d; 
+ transition: transform 0.3s; 
+ } 
+ .threed-text:hover span { 
+ transform: rotateY(360deg); 
+ } 
+ .text-shadow { 
+ text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+ } 
+ .text-overflow { 
+ width: 200px; 
+ white-space: nowrap;
+ overflow: hidden; 
+ text-overflow: ellipsis; 
+ } 
+ .word-wrap { 
+ word-wrap: break-word; 
+ max-width: 300px; 
+ } 
+ </style> 
+</head> 
+<body> 
+ <div class="container"> 
+ <h1>3D Text Effects</h1> 
+ <div class="threed-text text-shadow"> 
+ <span>3D Text</span> 
+ </div> 
+ <p class="text-overflow">This is a long piece of text that will demonstrate text overflow with  ellipsis.</p> 
+ <p class="word-wrap">This is a long piece of text that will demonstrate word wrap break word property.</p> 
+ </div> 
+</body> 
+</html> 
+Q2: 
+>>CREATE (:CarModel {name: "Honda City"})
+CREATE (:CarModel {name: "Skoda"})
+CREATE (:CarModel {name: "Creta"})
+CREATE (:CarModel {name: "Swift"})
+CREATE (:CarModel {name: "Ertiga"})
+
+
+CREATE (:Section {name: "Honda City Section"})
+CREATE (:Section {name: "Skoda Section"})
+CREATE (:Section {name: "Creta Section"})
+CREATE (:Section {name: "Swift Section"})
+CREATE (:Section {name: "Ertiga Section"})
+
+
+CREATE (:SalesStaff {name: "Mr. Narayan"})
+
+
+CREATE (:Customer {name: "Customer1"})
+CREATE (:Customer {name: "Customer2"})
+CREATE (:Customer {name: "Customer3"})
+
+
+CREATE (:Enquiry {details: "Interested in Honda City"})
+CREATE (:Enquiry {details: "Interested in Skoda"})
+
+
+CREATE (:Purchase {details: "Purchased Honda City"})
+CREATE (:Purchase {details: "Purchased Creta"})
+
+
+MATCH (honda:CarModel {name: "Honda City"}), (hondaSection:Section {name: "Honda City Section"})
+MERGE (honda)-[:HAS_MODEL]->(hondaSection)
+
+
+MATCH (narayan:SalesStaff {name: "Mr. Narayan"}), (hondaSection:Section {name: "Honda City Section"})
+MERGE (narayan)-[:HANDLES_SECTION]->(hondaSection)
+
+
+MATCH (customer:Customer {name: "Customer1"}), (enquiry:Enquiry {details: "Interested in Honda City"})
+MERGE (customer)-[:MADE_ENQUIRY]->(enquiry)
+
+
+MATCH (customer:Customer {name: "Customer1"}), (purchase:Purchase {details: "Purchased Honda City"})
+MERGE (customer)-[:MADE_PURCHASE]->(purchase)
+
+
+A: MATCH (car:CarModel) RETURN car.name;
+
+
+B: MATCH (:SalesStaff {name: "Mr. Narayan"})-[:HANDLES_SECTION]->(section:Section) RETURN section.name;
+
+
+C: MATCH (customer:Customer)-[:MADE_ENQUIRY]->(enquiry:Enquiry)
+WHERE NOT (customer)-[:MADE_PURCHASE]->()
+RETURN customer.name;
+
+
+D: MATCH (car:CarModel)-[:HAS_MODEL]->(:Section)-[:MADE_PURCHASE]->(:Purchase)
+RETURN car.name, COUNT(*) AS salesCount
+ORDER BY salesCount DESC
+LIMIT 1;
